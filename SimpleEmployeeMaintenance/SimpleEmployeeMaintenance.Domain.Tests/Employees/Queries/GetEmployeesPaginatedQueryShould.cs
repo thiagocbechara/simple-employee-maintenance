@@ -20,7 +20,7 @@ public class GetEmployeesPaginatedQueryShould
     }
 
     [Fact]
-    public async Task DeleteEmployee()
+    public async Task GetPaginatedEmployee()
     {
         //Arrange
         var command = new GetEmployeesPaginatedQuery
@@ -60,7 +60,7 @@ public class GetEmployeesPaginatedQueryShould
     }
 
     [Fact]
-    public async Task NotDeleteEmployee_When_Cancellation_WasRequested()
+    public async Task NotGetPaginatedEmployee_When_Cancellation_WasRequested()
     {
         //Arrange
         var command = new GetEmployeesPaginatedQuery();
