@@ -5,7 +5,7 @@ using SimpleEmployeeMaintenance.Domain.Entities;
 using SimpleEmployeeMaintenance.Domain.Models;
 using SimpleEmployeeMaintenance.Domain.Repositories;
 
-namespace SimpleEmployeeMaintenance.Domain.Tests.Queries;
+namespace SimpleEmployeeMaintenance.Domain.Tests.Employees.Queries;
 
 public class GetAllEmployeesQueryShould
 {

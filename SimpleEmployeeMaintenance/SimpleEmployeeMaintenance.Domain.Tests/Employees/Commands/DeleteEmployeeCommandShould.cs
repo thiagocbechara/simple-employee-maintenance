@@ -4,7 +4,7 @@ using SimpleEmployeeMaintenance.Domain.Employees.Commands.DeleteEmployee;
 using SimpleEmployeeMaintenance.Domain.Models;
 using SimpleEmployeeMaintenance.Domain.Repositories;
 
-namespace SimpleEmployeeMaintenance.Domain.Tests.Commands;
+namespace SimpleEmployeeMaintenance.Domain.Tests.Employees.Commands;
 
 public class DeleteEmployeeCommandShould
 {

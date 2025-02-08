@@ -5,7 +5,7 @@ using SimpleEmployeeMaintenance.Domain.Entities;
 using SimpleEmployeeMaintenance.Domain.Models;
 using SimpleEmployeeMaintenance.Domain.Repositories;
 
-namespace SimpleEmployeeMaintenance.Domain.Tests.Queries;
+namespace SimpleEmployeeMaintenance.Domain.Tests.Employees.Queries;
 
 public class GetEmployeeByIdQueryShould
 {
@@ -74,7 +74,7 @@ public class GetEmployeeByIdQueryShould
 
         _employeeRepositoryMock
             .Setup(r => r.GetByIdAsync(It.Is((Guid deletedId) => deletedId == command.Id)))
-            .ReturnsAsync((Employee?) null);
+            .ReturnsAsync((Employee?)null);
 
         //Act
         var result = await _handler.Handle(command, CancellationToken.None);

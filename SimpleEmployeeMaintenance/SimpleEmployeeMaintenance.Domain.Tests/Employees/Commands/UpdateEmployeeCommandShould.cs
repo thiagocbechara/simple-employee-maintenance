@@ -7,7 +7,7 @@ using SimpleEmployeeMaintenance.Domain.MapperProfiles;
 using SimpleEmployeeMaintenance.Domain.Models;
 using SimpleEmployeeMaintenance.Domain.Repositories;
 
-namespace SimpleEmployeeMaintenance.Domain.Tests.Commands;
+namespace SimpleEmployeeMaintenance.Domain.Tests.Employees.Commands;
 
 public class UpdateEmployeeCommandShould
 {

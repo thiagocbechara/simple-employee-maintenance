@@ -7,7 +7,7 @@ using SimpleEmployeeMaintenance.Domain.MapperProfiles;
 using SimpleEmployeeMaintenance.Domain.Models;
 using SimpleEmployeeMaintenance.Domain.Repositories;
 
-namespace SimpleEmployeeMaintenance.Domain.Tests.Commands;
+namespace SimpleEmployeeMaintenance.Domain.Tests.Employees.Commands;
 
 public class CreateEmployeeCommandShould
 {
@@ -63,7 +63,7 @@ public class CreateEmployeeCommandShould
             LastName = "Bechara",
             Address = "The only road I've ever known"
         };
-        
+
         //Act
         var result = await _handler.Handle(command, CancellationToken.None);
 
