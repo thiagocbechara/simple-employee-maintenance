@@ -20,13 +20,5 @@ public record struct Name
 
     #region Conversion Operators
     public static implicit operator string(Name name) => name.ToString();
-    public static implicit operator Name(string fullname)
-    {
-        var names = fullname.Split(' ');
-        if(names.Length > 0)
-            return new(names[0], names[^1]);
-
-        return new (fullname, string.Empty);
-    }
     #endregion
 }

@@ -9,4 +9,13 @@ public class Employee
     public Department Department { get; set; } = default!;
     public Phone Phone { get; set; } = default!;
     public Address Address { get; set; } = default!;
+
+    public bool IsValid()
+    {
+        return !string.IsNullOrWhiteSpace(Name)
+            && HireDate > DateOnly.MinValue
+            && !string.IsNullOrWhiteSpace(Department)
+            && !string.IsNullOrWhiteSpace(Phone)
+            && !string.IsNullOrWhiteSpace(Address);
+    }
 }
