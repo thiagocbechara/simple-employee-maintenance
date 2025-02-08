@@ -16,6 +16,7 @@ public static class DatabaseDependencyInjectionExtensions
         services.AddAutoMapper(typeof(DatabaseProfile));
 
         services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
         return services;
     }
