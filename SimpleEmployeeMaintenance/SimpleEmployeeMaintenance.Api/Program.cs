@@ -1,5 +1,5 @@
 using SimpleEmployeeMaintenance.Domain.Extensions;
-using SimpleEmployeeMaintenance.Infra.Database.DependecyInjections;
+using SimpleEmployeeMaintenance.Infra.Database.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

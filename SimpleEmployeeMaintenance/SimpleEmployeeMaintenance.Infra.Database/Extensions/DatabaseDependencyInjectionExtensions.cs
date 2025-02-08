@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using SimpleEmployeeMaintenance.Infra.Database.DataContexts;
 using SimpleEmployeeMaintenance.Infra.Database.MapperProfiles;
 
-namespace SimpleEmployeeMaintenance.Infra.Database.DependecyInjections;
+namespace SimpleEmployeeMaintenance.Infra.Database.Extensions;
 
-public static class DatabaseDI
+public static class DatabaseDependencyInjectionExtensions
 {
     public static IServiceCollection AddDatabaseService(this IServiceCollection services, IConfiguration configuration)
     {
