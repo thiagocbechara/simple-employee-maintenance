@@ -5,4 +5,5 @@ namespace SimpleEmployeeMaintenance.Domain.Repositories;
 public interface IEmployeeRepository
 {
     Task<Guid> SaveAsync(Employee employee);
+    Task UpdateAsync(Employee employee);
 }
