@@ -4,6 +4,7 @@ namespace SimpleEmployeeMaintenance.Domain.Entities;
 
 public class Employee
 {
+    public Guid Id { get; set; }
     public Name Name { get; set; }
     public DateOnly HireDate { get; set; }
     public Department Department { get; set; } = default!;
