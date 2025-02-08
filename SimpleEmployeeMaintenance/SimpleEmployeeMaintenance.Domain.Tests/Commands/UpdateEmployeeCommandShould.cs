@@ -77,7 +77,7 @@ public class UpdateEmployeeCommandShould
     }
 
     [Fact]
-    public async Task NotCreateEmployee_When_Cancellation_WasRequested()
+    public async Task NotUpdateEmployee_When_Cancellation_WasRequested()
     {
         //Arrange
         var command = new UpdateEmployeeCommand();
