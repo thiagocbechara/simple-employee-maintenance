@@ -9,5 +9,6 @@ public interface IEmployeeRepository
     Task UpdateAsync(Employee employee);
     Task<int> DeleteAsync(Guid id);
     Task<Employee?> GetByIdAsync(Guid id);
+    Task<IEnumerable<Employee>> GetAllAsync();
     Task<Pagination<Employee>> GetPaginatedAsync(int page, int quantityPerPage);
 }
