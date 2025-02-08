@@ -1,29 +1,29 @@
 ﻿using FluentAssertions;
 using Moq;
-using SimpleEmployeeMaintenance.Domain.Employees.Queries.GetAllEmployees;
+using SimpleEmployeeMaintenance.Domain.Employees.Queries.GetEmployeesPaginated;
 using SimpleEmployeeMaintenance.Domain.Entities;
 using SimpleEmployeeMaintenance.Domain.Models;
 using SimpleEmployeeMaintenance.Domain.Repositories;
 
 namespace SimpleEmployeeMaintenance.Domain.Tests.Employees.Queries;
 
-public class GetAllEmployeesQueryShould
+public class GetEmployeesPaginatedQueryShould
 {
     private readonly Mock<IEmployeeRepository> _employeeRepositoryMock;
-    private readonly GetAllEmployeesQueryHandler _handler;
+    private readonly GetEmployeesPaginatedQueryHandler _handler;
 
-    public GetAllEmployeesQueryShould()
+    public GetEmployeesPaginatedQueryShould()
     {
         _employeeRepositoryMock = new Mock<IEmployeeRepository>(MockBehavior.Strict);
 
-        _handler = new GetAllEmployeesQueryHandler(_employeeRepositoryMock.Object);
+        _handler = new GetEmployeesPaginatedQueryHandler(_employeeRepositoryMock.Object);
     }
 
     [Fact]
     public async Task DeleteEmployee()
     {
         //Arrange
-        var command = new GetAllEmployeesQuery
+        var command = new GetEmployeesPaginatedQuery
         {
             Page = 1,
             QuantityPerPage = 10,
@@ -63,7 +63,7 @@ public class GetAllEmployeesQueryShould
     public async Task NotDeleteEmployee_When_Cancellation_WasRequested()
     {
         //Arrange
-        var command = new GetAllEmployeesQuery();
+        var command = new GetEmployeesPaginatedQuery();
         var cancellationToken = new CancellationToken(true);
 
         //Act

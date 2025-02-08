@@ -3,12 +3,12 @@ using SimpleEmployeeMaintenance.Domain.Entities;
 using SimpleEmployeeMaintenance.Domain.Models;
 using SimpleEmployeeMaintenance.Domain.Repositories;
 
-namespace SimpleEmployeeMaintenance.Domain.Employees.Queries.GetAllEmployees;
+namespace SimpleEmployeeMaintenance.Domain.Employees.Queries.GetEmployeesPaginated;
 
-internal class GetAllEmployeesQueryHandler(IEmployeeRepository repository)
-    : IRequestHandler<GetAllEmployeesQuery, Result<Pagination<Employee>>>
+internal class GetEmployeesPaginatedQueryHandler(IEmployeeRepository repository)
+    : IRequestHandler<GetEmployeesPaginatedQuery, Result<Pagination<Employee>>>
 {
-    public async Task<Result<Pagination<Employee>>> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)
+    public async Task<Result<Pagination<Employee>>> Handle(GetEmployeesPaginatedQuery request, CancellationToken cancellationToken)
     {
         if (cancellationToken.IsCancellationRequested)
         {
