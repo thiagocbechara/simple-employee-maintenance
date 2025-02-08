@@ -6,4 +6,5 @@ public interface IEmployeeRepository
 {
     Task<Guid> SaveAsync(Employee employee);
     Task UpdateAsync(Employee employee);
+    Task<int> DeleteAsync(Guid id);
 }
