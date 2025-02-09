@@ -1,14 +1,11 @@
-﻿namespace SimpleEmployeeMaintenance.Infra.Database.Entities;
+﻿namespace SimpleEmployeeMaintenance.Api.Dtos;
 
-internal class EmployeeDb
+public class CreateEmployeeDto
 {
-    public Guid Id { get; set; }
-    public Guid DepartmentId { get; set; }
     public string FirstName { get; set; } = default!;
     public string LastName { get; set; } = default!;
+    public string Department { get; set; } = default!;
     public DateOnly HireDate { get; set; }
     public string Phone { get; set; } = default!;
     public string Address { get; set; } = default!;
-
-    public DepartmentDb? Department { get; set; } = default!;
 }

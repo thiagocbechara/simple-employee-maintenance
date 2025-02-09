@@ -70,7 +70,15 @@ internal class EmployeeRepository(
     {
         var employeeDb = mapper.Map<EmployeeDb>(employee);
 
+        var department = await context.Departments.AsNoTracking().FirstOrDefaultAsync(d => d.Name == employee.Department.Name);
+        if(department is not null)
+        {
+            employeeDb.DepartmentId = department.Id;
+            employeeDb.Department = null;
+        }
+
         var entry = context.Employees.Add(employeeDb);
+
         await context.SaveChangesAsync();
 
         return entry.Entity.Id;
