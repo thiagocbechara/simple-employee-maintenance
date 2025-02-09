@@ -6,6 +6,8 @@ using SimpleEmployeeMaintenance.Domain.Employees.Commands.CreateEmployee;
 using SimpleEmployeeMaintenance.Domain.Employees.Commands.DeleteEmployee;
 using SimpleEmployeeMaintenance.Domain.Employees.Queries.GetAllEmployees;
 using SimpleEmployeeMaintenance.Domain.Employees.Queries.GetEmployeeById;
+using SimpleEmployeeMaintenance.Domain.Employees.Queries.GetEmployeesPaginated;
+using SimpleEmployeeMaintenance.Domain.Models;
 
 namespace SimpleEmployeeMaintenance.Api.Controllers;
 
@@ -56,11 +58,7 @@ public class EmployeeController(
     {
         try
         {
-            var query = new GetEmployeeByIdQuery
-            {
-                Id = id
-            };
-
+            var query = new GetEmployeeByIdQuery { Id = id };
             var result = await mediator.Send(query);
 
             return result.IsSuccess
@@ -79,11 +77,7 @@ public class EmployeeController(
     {
         try
         {
-            var query = new DeleteEmployeeCommand
-            {
-                Id = id
-            };
-
+            var query = new DeleteEmployeeCommand { Id = id };
             var result = await mediator.Send(query);
 
             return result.IsSuccess
@@ -92,7 +86,7 @@ public class EmployeeController(
         }
         catch (Exception exception)
         {
-            logger.LogError(exception, "An error has occurred at {0}.", nameof(GetAsync));
+            logger.LogError(exception, "An error has occurred at {0}.", nameof(DeleteAsync));
             return InternalError();
         }
     }
@@ -110,7 +104,33 @@ public class EmployeeController(
         }
         catch (Exception exception)
         {
-            logger.LogError(exception, "An error has occurred at {0}.", nameof(GetAsync));
+            logger.LogError(exception, "An error has occurred at {0}.", nameof(GetAllAsync));
+            return InternalError();
+        }
+    }
+
+    [HttpGet("{pageSize}/{page}")]
+    public async Task<IActionResult> GetPaginatedAsync(
+        [FromRoute] int page,
+        [FromRoute] int pageSize,
+        [FromServices] IMapper mapper)
+    {
+        try
+        {
+            var query = new GetEmployeesPaginatedQuery
+            {
+                Page = page,
+                QuantityPerPage = pageSize,
+            };
+            var result = await mediator.Send(query);
+
+            return result.IsSuccess
+                ? Ok(mapper.Map<Pagination<EmployeeDto>>(result.Value))
+                : NotFound(result.ErrorMesage);
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, "An error has occurred at {0}.", nameof(GetPaginatedAsync));
             return InternalError();
         }
     }

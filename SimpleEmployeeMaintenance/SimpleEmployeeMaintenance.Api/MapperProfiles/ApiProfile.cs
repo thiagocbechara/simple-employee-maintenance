@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SimpleEmployeeMaintenance.Api.Dtos;
 using SimpleEmployeeMaintenance.Domain.Entities;
+using SimpleEmployeeMaintenance.Domain.Models;
 
 namespace SimpleEmployeeMaintenance.Api.MapperProfiles;
 
@@ -14,5 +15,7 @@ public class ApiProfile : Profile
             .ForMember(db => db.Department, opt => opt.MapFrom(e => e.Department.Name))
             .ForMember(db => db.Address, opt => opt.MapFrom(e => e.Address.FullAddress))
             .ForMember(db => db.Phone, opt => opt.MapFrom(e => e.Phone.Number));
+
+        CreateMap<Pagination<Employee>, Pagination<EmployeeDto>>();
     }
 }
