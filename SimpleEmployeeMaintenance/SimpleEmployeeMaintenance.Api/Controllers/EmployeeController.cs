@@ -82,7 +82,7 @@ public class EmployeeController(
 
             return result.IsSuccess
                 ? NoContent()
-                : NotFound(result.ErrorMesage);
+                : BadRequest(result.ErrorMesage);
         }
         catch (Exception exception)
         {
