@@ -1,11 +1,13 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SimpleEmployeeMaintenance.Api.Dtos;
 using SimpleEmployeeMaintenance.Domain.Employees.Commands.CreateEmployee;
+using SimpleEmployeeMaintenance.Domain.Employees.Queries.GetEmployeeById;
 
 namespace SimpleEmployeeMaintenance.Api.Controllers;
 
-[Route("api/employee")]
+[Route("api/employee/")]
 [ApiController]
 public class EmployeeController(
     ISender mediator,
@@ -34,13 +36,38 @@ public class EmployeeController(
             var result = await mediator.Send(command);
 
             return result.IsSuccess
-                ? Ok(result)
-                : BadRequest(result);
+                ? Ok(result.Value)
+                : BadRequest(result.ErrorMesage);
 
         }
         catch (Exception exception)
         {
             logger.LogError(exception, "An error has occurred at {0}.", nameof(PostAsync));
+            return InternalError();
+        }
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetAsync(
+        [FromRoute] Guid id,
+        [FromServices] IMapper mapper)
+    {
+        try
+        {
+            var query = new GetEmployeeByIdQuery
+            {
+                Id = id
+            };
+
+            var result = await mediator.Send(query);
+
+            return result.IsSuccess
+                ? Ok(mapper.Map<EmployeeDto>(result.Value))
+                : NotFound(result.ErrorMesage);
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, "An error has occurred at {0}.", nameof(GetAsync));
             return InternalError();
         }
     }

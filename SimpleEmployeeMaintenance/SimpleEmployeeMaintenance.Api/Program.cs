@@ -1,3 +1,4 @@
+using SimpleEmployeeMaintenance.Api.MapperProfiles;
 using SimpleEmployeeMaintenance.Domain.Extensions;
 using SimpleEmployeeMaintenance.Infra.Database.Extensions;
 using System.Text.Json;
@@ -18,6 +19,7 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 
 builder.Services.AddDomainServices();
 builder.Services.AddDatabaseService(builder.Configuration);
+builder.Services.AddAutoMapper(typeof(ApiProfile));
 
 var app = builder.Build();
 
