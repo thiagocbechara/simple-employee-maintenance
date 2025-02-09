@@ -8,6 +8,7 @@ In the root directory of this repository, do as describe below:
  3. Run the command to apply database migrations: `dotnet ef database update --project .\SimpleEmployeeMaintenance\SimpleEmployeeMaintenance.Infra.Database\SimpleEmployeeMaintenance.Infra.Database.csproj --startup-project .\SimpleEmployeeMaintenance\SimpleEmployeeMaintenance.Api\SimpleEmployeeMaintenance.Api.csproj`
  4. Run the command to startup application: `dotnet run --project .\SimpleEmployeeMaintenance\SimpleEmployeeMaintenance.Api\SimpleEmployeeMaintenance.Api.csproj`
  5. Open any browser and navigate to `http://localhost:5081/swagger/index.html`
+ 6. Enjoy!
 
 ## Entity-Relationship Diagram
 <img src="./ERD.drawio.png">
