@@ -11,6 +11,11 @@ using SimpleEmployeeMaintenance.Domain.Models;
 
 namespace SimpleEmployeeMaintenance.Api.Controllers;
 
+/// <summary>
+/// Routes for employees
+/// </summary>
+/// <param name="mediator"></param>
+/// <param name="logger"></param>
 [Route("api/employee/")]
 [ApiController]
 public class EmployeeController(
@@ -18,7 +23,18 @@ public class EmployeeController(
     ILogger<EmployeeController> logger)
     : ControllerBase
 {
+    /// <summary>
+    /// Create a new employee
+    /// </summary>
+    /// <param name="createEmployeeDto">Employee data</param>
+    /// <response code="200">Id for new employee</response>
+    /// <response code="400">Employee data has errors</response>
+    /// <response code="500">Unexpected error message</response>
     [HttpPost]
+    [Produces("application/json")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
     public async Task<IActionResult> PostAsync([FromBody] CreateEmployeeDto createEmployeeDto)
     {
         try
@@ -51,7 +67,19 @@ public class EmployeeController(
         }
     }
 
+    /// <summary>
+    /// Get a employee by Id
+    /// </summary>
+    /// <param name="id">Employee's Id</param>
+    /// <param name="mapper"></param>
+    /// <response code="200">Employee data for informed Id</response>
+    /// <response code="404">Employee not found for informed Id</response>
+    /// <response code="500">Unexpected error message</response>
     [HttpGet("{id}")]
+    [Produces("application/json")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EmployeeDto))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
     public async Task<IActionResult> GetAsync(
         [FromRoute] Guid id,
         [FromServices] IMapper mapper)
@@ -72,7 +100,18 @@ public class EmployeeController(
         }
     }
 
+    /// <summary>
+    /// Delete a employee by Id
+    /// </summary>
+    /// <param name="id">Employee's Id</param>
+    /// <response code="204">Employee was deleted</response>
+    /// <response code="400">Error message when could't delete employee</response>
+    /// <response code="500">Unexpected error message</response>
     [HttpDelete("{id}")]
+    [Produces("application/json")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
     public async Task<IActionResult> DeleteAsync([FromRoute] Guid id)
     {
         try
@@ -91,7 +130,18 @@ public class EmployeeController(
         }
     }
 
+    /// <summary>
+    /// Get all employees
+    /// </summary>
+    /// <param name="mapper"></param>
+    /// <response code="200">List of all employees</response>
+    /// <response code="404">Error message when could't get all employees</response>
+    /// <response code="500">Unexpected error message</response>
     [HttpGet]
+    [Produces("application/json")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<EmployeeDto>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
     public async Task<IActionResult> GetAllAsync([FromServices] IMapper mapper)
     {
         try
@@ -109,7 +159,20 @@ public class EmployeeController(
         }
     }
 
+    /// <summary>
+    /// Get employees paginated
+    /// </summary>
+    /// <param name="page">Desired page from pagination</param>
+    /// <param name="pageSize">Pages size</param>
+    /// <param name="mapper"></param>
+    /// <response code="200">List of all employees in the current page</response>
+    /// <response code="404">Error message when could't get employees</response>
+    /// <response code="500">Unexpected error message</response>
     [HttpGet("{pageSize}/{page}")]
+    [Produces("application/json")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Pagination<EmployeeDto>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
     public async Task<IActionResult> GetPaginatedAsync(
         [FromRoute] int page,
         [FromRoute] int pageSize,
