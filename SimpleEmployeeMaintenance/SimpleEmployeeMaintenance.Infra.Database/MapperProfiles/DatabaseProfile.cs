@@ -17,6 +17,8 @@ internal class DatabaseProfile : Profile
             .ForMember(db => db.Phone, opt => opt.MapFrom(e => e.Phone.Number))
             .ReverseMap()
             .ForMember(e => e.Name, opt => opt.MapFrom(db => new Name(db.FirstName, db.LastName)))
-            .ForMember(e => e.Department, opt => opt.MapFrom(db => db.Department!.Name));
+            .ForMember(e => e.Department, opt => opt.MapFrom(db => new Department(db.Department!.Name)))
+            .ForMember(e => e.Phone, opt => opt.MapFrom(db => new Phone(db.Phone)))
+            .ForMember(e => e.Address, opt => opt.MapFrom(db => new Address(db.Address)));
     }
 }
