@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SimpleEmployeeMaintenance.Api.Dtos;
 using SimpleEmployeeMaintenance.Domain.Employees.Commands.CreateEmployee;
+using SimpleEmployeeMaintenance.Domain.Employees.Commands.DeleteEmployee;
 using SimpleEmployeeMaintenance.Domain.Employees.Queries.GetEmployeeById;
 
 namespace SimpleEmployeeMaintenance.Api.Controllers;
@@ -63,6 +64,29 @@ public class EmployeeController(
 
             return result.IsSuccess
                 ? Ok(mapper.Map<EmployeeDto>(result.Value))
+                : NotFound(result.ErrorMesage);
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, "An error has occurred at {0}.", nameof(GetAsync));
+            return InternalError();
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync([FromRoute] Guid id)
+    {
+        try
+        {
+            var query = new DeleteEmployeeCommand
+            {
+                Id = id
+            };
+
+            var result = await mediator.Send(query);
+
+            return result.IsSuccess
+                ? NoContent()
                 : NotFound(result.ErrorMesage);
         }
         catch (Exception exception)
